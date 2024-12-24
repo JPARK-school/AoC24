@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "Node.h"
 
 int compare_ints(const void *a, const void *b){
     return *(int*)a - *(int*)b;
@@ -16,8 +17,6 @@ int main(){
 
     for(int i = 0; i < 6; i++){
         fscanf(fin, "%d %d", &one[i], &two[i]);
-        //check array storage
-        printf("In index i = %d, one holds %d and two holds %d.\n", i, one[i], two[i]);
     }
 
     //sort array numberical order - quicksort
@@ -25,8 +24,13 @@ int main(){
     qsort(one, 6, sizeof(int), compare_ints);
     qsort(two, 6, sizeof(int), compare_ints);
 
-    //similarity score
+    //Linked List
+    struct Node* L;
 
+    //similarity score
+    for(int i = 0; i < 6; i++){
+        
+    }
 
     //close file
     fclose(fin);
