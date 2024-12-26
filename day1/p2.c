@@ -25,13 +25,18 @@ int main(){
     qsort(two, 6, sizeof(int), compare_ints);
 
     //Linked List
-    struct Node* L;
+    struct Node* oneL;
+    struct Node* twoL;
 
     //similarity score
     for(int i = 0; i < 6; i++){
-        
+        oneL = find(one[i], oneL);
+        twoL = find(two[i], twoL);
     }
-
+    printf("oneL: \n");
+    printList(oneL);
+    printf("twoL: \n");
+    printList(twoL);
     //close file
     fclose(fin);
 
