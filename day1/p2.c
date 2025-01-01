@@ -24,24 +24,22 @@ int main(){
     qsort(two, 1000, sizeof(int), compare_ints);
 
     //Array
-    int* oneL = calloc(99983, sizeof(int));
-    int* twoL = calloc(99983, sizeof(int));
+    int* twoL = calloc(100000, sizeof(int));
 
     //similarity score
     for(int i = 0; i < 1000; i++){
-        oneL[i] = one[i];
         twoL[two[i]-1]++;
     }
     int score = 0;
-    for(int i = 0; i < 99983; i++){
-        score += (oneL[i]*twoL[one[i]-1]);
+    for(int i = 0; i < 1000; i++){
+        printf("%d - oneL: %d, twoL: %d\n", i, one[i], twoL[one[i]-1]);
+        score += (one[i]*twoL[one[i]-1]);
     }
     printf("score: %d\n", score);
 
     //close file
     fclose(fin);
     //free memory - only dynamic memory
-    free(oneL);
     free(twoL);
 
     return 0;
