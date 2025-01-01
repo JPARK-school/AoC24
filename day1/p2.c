@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Node.h"
 
 int compare_ints(const void *a, const void *b){
     return *(int*)a - *(int*)b;
@@ -9,36 +8,41 @@ int compare_ints(const void *a, const void *b){
 int main(){
 
     //open file
-    FILE* fin  = fopen("simple.txt", "r");
+    FILE* fin  = fopen("input.txt", "r");
 
-    //create 2 arrays //simple 6; input 6;
-    int one[6];
-    int two[6];
+    //create 2 arrays //simple 1000; input 1000
+    int one[1000];
+    int two[1000];
 
-    for(int i = 0; i < 6; i++){
+    for(int i = 0; i < 1000; i++){
         fscanf(fin, "%d %d", &one[i], &two[i]);
     }
 
     //sort array numberical order - quicksort
     printf("Quicksort arrays ascending.\n");
-    qsort(one, 6, sizeof(int), compare_ints);
-    qsort(two, 6, sizeof(int), compare_ints);
+    qsort(one, 1000, sizeof(int), compare_ints);
+    qsort(two, 1000, sizeof(int), compare_ints);
 
-    //Linked List
-    struct Node* oneL;
-    struct Node* twoL;
+    //Array
+    int* oneL = calloc(99983, sizeof(int));
+    int* twoL = calloc(99983, sizeof(int));
 
     //similarity score
-    for(int i = 0; i < 6; i++){
-        oneL = find(one[i], oneL);
-        twoL = find(two[i], twoL);
+    for(int i = 0; i < 1000; i++){
+        oneL[i] = one[i];
+        twoL[two[i]-1]++;
     }
-    printf("oneL: \n");
-    printList(oneL);
-    printf("twoL: \n");
-    printList(twoL);
+    int score = 0;
+    for(int i = 0; i < 99983; i++){
+        score += (oneL[i]*twoL[one[i]-1]);
+    }
+    printf("score: %d\n", score);
+
     //close file
     fclose(fin);
+    //free memory - only dynamic memory
+    free(oneL);
+    free(twoL);
 
     return 0;
 }
